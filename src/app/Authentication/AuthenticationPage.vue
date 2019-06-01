@@ -1,9 +1,11 @@
 <template>
-  <div class="container md:max-w-full lg:max-w-full">
+  <div class="md:max-w-full lg:max-w-full">
     <div class="home-page h-screen">
       <div class="bg-gray-200 l-home-page h-full"></div>
       <div class="r-home-page h-full">
-        <router-view />
+        <transition name="fade" mode="out-in">
+          <router-view />
+        </transition>
       </div>
     </div>
   </div>
@@ -27,20 +29,38 @@ export default {
   align-items: center;
 
   .l-home-page {
-    width: 60%;
-    flex: 0 1 auto;
-    background: url("../assets/img/undraw_blogging_vpvv.svg") no-repeat;
+    flex: 0 0 0;
     background-size: contain;
-    background-color: #fff;
+    background: #fff url("../assets/img/undraw_authentication_fsn5.svg")
+      no-repeat center;
+
+    @media (min-width: 768px) {
+      flex: 0 1 60%;
+    }
   }
 
   .r-home-page {
-    width: 40%;
     display: flex;
-    flex: 0 1 auto;
+    flex: 0 0 100%;
     align-self: center;
     justify-content: space-around;
     background-color: #edf2f7;
+
+    @media (min-width: 768px) {
+      flex: 0 1 40%;
+    }
   }
+}
+
+.fade-leave-active {
+  transition-duration: 0.2s;
+  transition-property: height, opacity;
+  transition-timing-function: ease;
+  overflow: hidden;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>
